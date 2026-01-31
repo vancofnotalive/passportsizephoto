@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            scrollbar-width: none;
+        }
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(0, 89, 255);
+    width: 100dvw;
+    overflow: hidden;
+}
+.pages {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    
+}
+.pages .main-page {
+    height: 100%;
+    width: 100%;
+    
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+}
+.photo-print .content {
+    width: calc(var(---page--CW) * 0.48);
+    position: relative;
+    left: calc(var(---page--CW) * 0.0100);
+    height: calc(100% - 5dvh);
+    align-self: flex-start;
+    overflow-y: scroll;
+ 
+}
+.photo-print .preview {
+    height: 100%;
+    position: relative;
+    width: calc(var(---page--CW) * 0.48);
+    right: calc(var(---page--CW) * 0.0100);
+    background-color: ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+.photo-print .content-nav {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    padding-bottom: 2px !important;
+    
+}
+.photo-print .content-nav h1 {
+    max-width: 60%;
+    font-size: calc((var(---photo-print___content--CH) + var(---photo-print___content--CW)) / 40);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+.photo-print .content-nav button input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.photo-print .content-nav button {
+    position: relative;
+    font-size: calc((var(---photo-print___content--CH) + var(---photo-print___content--CW)) / 70); 
+    height: calc(var(---photo-print___content-nav____h1--CH) * 0.8);
+    width: calc(var(---photo-print___content-nav____h1--CW) * 0.4);
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(9, 143, 9);
+    color: white;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+    }
+    .pages {
+        flex-direction: column;
+    }
+    .pages .main-page {
+        flex-direction: column;
+        
+    }
+    .photo-print .content {
+        width: var(---page--CW);
+        left: 0;
+    }
+    .photo-print .content-nav {
+        padding: calc(var(---page--CH) / 50) 0 !important;
+    }
+    .photo-print .content-nav button {
+        height: calc(var(---page--CH) / 20);
+        
+    }
+    .photo-print .preview {
+        width: var(---page--CW);
+        right: 0;
+    }
+    .photo-print .content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .photo-print .content .heading {
+width: calc(100% - 1ch) !important;
+
+
+    }
+    .photo-print .content .slider {
+width: calc(100% - 1ch);
+
+    }
+    .photo-print .remove-bg-picker {
+        align-self: flex-start;
+        margin-left: 1ch !important;
+    }
+    .photo-print .preview-nav {
+        height: calc(var(---page--CH) / 10) !important;
+  
+    }
+    .photo-print .preview-nav main {
+              overflow-x: scroll;
+        align-items: center;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start;
+    }
+    .photo-print .preview-nav  button {
+        flex-shrink: 0 !important;
+        height: calc(100% / 1.3) !important;
+        font-size: calc(var(---photo-print___content-nav____button--font-size) * 1.1) !important;
+        
+    }
+    .photo-print .preview-photos {
+        height: calc((var(---photo-print___content--CH) - (var(---page--CH) / 10)) - 2dvh) !important;
+    }
+    .photo-print .preview-nav .preview-print span{
+        padding: calc((var(---page--CH) + var(---page--CW)) / 80) !important;
+
+    }
+}
+.photo-print .content .heading {
+    width: 100%;
+    height: fit-content;
+    padding: calc(var(---page--CH) / 50) 0 !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+.photo-print .content .heading h1 {
+    font-size: calc(var(---photo-print___content-nav____button--font-size) * 1.5);
+    color: white;
+}
+.photo-print .content .heading h1::before {
+    content: "• ";
+}
+.photo-print .slider {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: calc(var(---page--CH) / 100) 0 !important;
+    
+}
+.photo-print .slider h1 {
+    font-size: calc(var(---photo-print___content-nav____button--font-size) * 1.1);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    
+}
+.photo-print .remove-bg-picker {
+    display: flex;
+    flex-direction: column;
+    width: calc(var(---photo-print___content--CW) / 2);
+}
+.photo-print .remove-bg-picker input {
+    width: 100%;
+    height: calc(var(---page--CH) / 20);
+}
+.photo-print .remove-bg-picker button {
+    height: calc(var(---page--CH) / 20);
+    margin: 1dvh 0 !important;
+    font-size: calc(var(---photo-print___content-nav____button--font-size) * 0.8);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    background-color: rgb(9, 143, 9);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.photo-print .preview-nav {
+    height: calc(var(---page--CH) / 6);
+    width: 100%;
+    display: flex;
+    
+}
+.photo-print .preview-photos {
+        height: calc(var(---photo-print___content--CH) - (var(---page--CH) / 5.5));
+        margin-top: 1dvh !important;
+    aspect-ratio: 210 / 297;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-self: flex-start !important;
+    margin-left: calc(var(---photo-print___content--CW) * 0.025) !important;
+    max-width: calc(var(---photo-print___content--CW) * 0.60);
+    flex-wrap: wrap;
+    align-content: start;
+}
+.photo-print .preview-nav button {
+height: calc((100% / 2) - var(---page--CH) / 50);
+width: fit-content;
+padding: calc(var(---page--CH) / 100) calc(var(---page--CH) / 50) !important;
+margin: 1dvh !important;
+border: none;
+border-radius: 5px;
+font-size: calc(var(---photo-print___content-nav____button--font-size) * 0.7);
+cursor: pointer;
+}
+.preview-selection {
+    position: absolute;
+    bottom: 0;
+    right: calc(var(---photo-print___content--CW) * 0.025);
+    width: calc((var(---photo-print___preview--CW) - var(---photo-print___preview___preview-photos--CW)) - (var(---photo-print___content--CW) * 0.075));
+    height: calc((var(---photo-print___preview--CH) - var(---photo-print___preview___preview-nav--CH)) - 1dvh);
+    background-color: rgb(0, 26, 255);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+.preview-photos img {
+    width: calc((100% / 6) - 4px);
+    height: calc((100% / 7) - 2px);
+    margin: 2px !important;
+    margin-bottom: 0 !important;
+}
+.preview-selection img {
+    width: 100%;
+    border-bottom: 5px solid rgb(0, 207, 0);
+}
+.preview-nav main {
+    width: 80%;
+    height: 100%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    align-items: center;
+    justify-content: center;
+}
+.preview-nav .preview-print {
+    height: 100%;
+    width: 20%;
+    
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(---photo-print___content-nav____button--font-size));
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(9, 143, 9);
+}
+.preview-nav .preview-print span {
+    display: flex;
+    padding: calc((var(---page--CH) + var(---page--CW)) / 150);
+    background-color: rgb(103, 143, 9);
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.app-info {
+    position: absolute;
+    bottom: 0;
+    left: calc((var(---photo-print___content--left) / 2));
+    
+    height: 5dvh;
+    width: calc(var(---photo-print___content--CW) + (var(---photo-print___content--left) / 2));
+    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: calc((var(---app-info--CH) + var(---app-info--CW)) / 50);
+}
+.image-cropper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: +9;
+    display: flex;
+    flex-direction: column;
+}
+.image-cropper-control-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: calc(var(---page--CH) / 10);
+}
+.image-cropper-control-nav button {
+    padding: calc(var(---page--CH) / 50) !important;
+    margin: 1dvh !important;
+}
+.image-cropper-control-nav button:nth-child(1) {
+    margin-left: 5dvh !important;
+}
+.image-cropper-nav {
+    width: calc(100% - var(---image-cropper-control-nav--CW));
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: start;
+    justify-content: start;
+    overflow-x: scroll;
+    height: calc(var(---page--CH) / 10);
+    
+}
+.image-cropper-nav .btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  border: calc(var(---image-cropper-nav--CH) / 35) solid rgb(0, 89, 255);
+  height: calc(100% - 2dvh);
+  margin: 1dvh 2dvh !important;
+  flex-shrink: 0 !important;
+  padding: 0 2dvh !important;
+  
+
+}
+.image-cropper-nav .btn h1  {
+font-size: calc(var(---photo-print___content-nav____button--font-size));
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.image-cropper-nav .btn input{
+position: absolute;
+height: 100%;
+width: 100%;
+opacity: 0;
+}
+.image-cropper-area {
+    position: relative;
+    width: 100%;
+    height: calc(100% - var(---image-cropper-nav--CH));
+    overflow: scroll;
+    background-color: rgb(0, 0, 0 , 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-cropper-area img {
+    
+}
+.cropper-fixed {
+  
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  cursor: grab;
+    
+
+}
+
+.cropper-fixed:active {
+  cursor: grabbing;
+}
+
+.cropper-fixed img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  user-select: none;
+  pointer-events: none;
+  
+}
+
+    </style>
+</head>
+<body class="page" id="page">
+    <!-- <section class="image-cropper" id="image-cropper">
+        <section class="image-cropper-control-nav">
+            <button>S</button>
+            <button id="confirm">C</button>
+            <button>X</button>
+        </section>
+        <section class="image-cropper-nav">
+          
+            <section class="btn" data-property="height">
+           <h1>Height: <span>500 </span> pixel </h1>     <input oninput="adjustCropper(this)" type="text">
+            </section>
+            <section class="btn" data-property="width">
+           <h1>Width: <span>500</span> pixel </h1>     <input oninput="adjustCropper(this)" type="text">
+            </section>
+         
+          
+         
+            
+        </section>
+        <section class="image-cropper-area">
+<section class="cropper-fixed" style="height: 500px; width: 500px;">
+    <img src="" id="image" alt="">
+</section>
+        </section>
+  
+    </section> -->
+  <section class="pages">
+<section class="main-page photo-print _main-page" data-app-page="PHOTO_PRINT">
+<section class="content">
+<section class="content-nav">
+    <h1>Passport size photo</h1>
+    <button>
+        <input type="file" name="" id="upload-passport-size-photo" multiple>
+        Upload</button>
+</section>
+
+<section class="heading">
+    <h1>Editing</h1>
+</section>
+<section class="slider _slider" data-filter="CONTRAST">
+    <h1>Contrast <span class="_slider-value">100</span></h1>
+    <input min="0" max="200" value="100" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="BRIGHTNESS">
+    <h1>Brightness <span class="_slider-value">100</span></h1>
+    <input min="0" max="200" value="100" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="SATURATE">
+    <h1>Saturate <span class="_slider-value">100</span></h1>
+    <input min="0" max="200" value="100" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="GRAYSCALE">
+    <h1>Grayscale <span class="_slider-value">0</span></h1>
+    <input min="0" max="100" value="0" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="SEPIA">
+    <h1>Sepia <span class="_slider-value">0</span></h1>
+    <input min="0" max="100" value="0" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="HUE_ROTATE">
+    <h1>Hue Rotate <span class="_slider-value">0</span></h1>
+    <input min="0" max="360" value="0" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="INVERT">
+    <h1>Invert <span class="_slider-value">0</span></h1>
+    <input min="0" max="100" value="0" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="BLUR">
+    <h1>Blur <span class="_slider-value">0</span></h1>
+    <input min="0" max="20" value="0" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+<section class="slider _slider" data-filter="OPACITY">
+    <h1>Opacity <span class="_slider-value">100</span></h1>
+    <input min="0" max="100" value="100" type="range" oninput="adjustFilter(this)" class="slider">
+</section>
+
+<section class="heading">
+    <h1>Remove bg</h1>
+</section>
+<section class="remove-bg-picker">
+    <input id="passport-size-remove-background" value="#00bcd4" type="color">
+    <button id="passport-size-remove-background-btn">Remove background</button>
+</section>
+</section>
+<section class="app-info">
+Selected: <span id="selected-count"></span>
+</section>
+<section class="preview">
+<section class="preview-nav">
+    <main>
+
+        <button onclick="selectMultiplePassportPhoto(this)"> Select multiple </button>
+        <button onclick="clearTargetImages()"> Clear selected images </button>
+        <button onclick="deleteTargetImages()"> Delete selected images </button>
+        <button onclick="clearA4Paper()"> Clear paper </button>
+        <button onclick="selectAllPreview()"> Select all </button>
+    
+    </main>
+    <section onclick="passPortPhotoPrint()" class="preview-print">
+        <span>Print</span>
+    </section>
+
+</section>
+<section class="preview-photos" id="passport-size-photo-a4">
+
+</section>
+<section class="preview-selection" id="preview-select-show">
+
+</section>
+</section>
+</section>
+  </section>
+
+
+    <script>
+      let urlArray = [];
+let urls = document.currentScript.dataset.css;
+if (urls)
+  urlArray = [...urls.matchAll(/\[([^\]]+)\]/g)].map(match => match[1]);
+let isSeperationArchitecture;
+if (!document.currentScript.dataset.sepration || document.currentScript.dataset.sepration == "false")
+  isSeperationArchitecture = false;
+else if (document.currentScript.dataset.sepration && document.currentScript.dataset.sepration == "true")
+  isSeperationArchitecture = getCurrentDevice() == null ? false : true;
+const specialVarsMapIndex = new Map();
+const specialVarsMap = [];
+function removePseudoClasses(selector) {
+  return selector.replace(/:{1,2}[a-zA-Z-]+/g, '');
+}
+function addSpecialVar(obj) {
+  const index = specialVarsMapIndex.get(obj.varName);
+  if (index !== undefined) {
+    specialVarsMap[index] = obj;
+    return;
+  }
+  specialVarsMapIndex.set(obj.varName, specialVarsMap.length);
+  specialVarsMap.push(obj)
+}
+let updatingVars = false;
+async function fetchAllExternalCSS(links) {
+  let allCSS = '';
+  for (const link of links) {
+    try {
+      const response = await fetch(link);
+      if (!response.ok) throw new Error(`Failed to fetch ${link}`);
+      const cssText = await response.text();
+      allCSS += cssText + '\n';
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  return allCSS;
+}
+function setupSpecialVarsInternal() {
+  for (const sheet of document.styleSheets) {
+    try {
+      for (const rule of sheet.cssRules) {
+        processRule(rule);
+      }
+    } catch { }
+  }
+}
+async function setupSpecialVarsExternal() {
+  let css = await fetchAllExternalCSS(urlArray);
+  let stylesheet = new CSSStyleSheet();
+  stylesheet.replaceSync(css);
+  for (const rule of stylesheet.cssRules) {
+    processRule(rule);
+  }
+}
+function processRule(rule) {
+  if (rule.type === CSSRule.STYLE_RULE && !rule.selectorText.includes(":root")) {
+    const css = rule.style.cssText;
+    if (rule.selectorText == "title") {
+      titleRule = rule;
+    }
+    css.split(";").forEach(decl => {
+      const [prop, val] = decl.split(":");
+      if (!prop || !val) return;
+      extractVarsFromValue(val, rule.selectorText);
+    });
+  }
+  else if (rule.type === CSSRule.KEYFRAMES_RULE) {
+    for (const kf of rule.cssRules) {
+      if (kf.type === CSSRule.KEYFRAME_RULE && kf.style) {
+        for (let i = 0; i < kf.style.length; i++) {
+          const value = kf.style.getPropertyValue(kf.style[i]);
+          extractVarsFromValue(value);
+        }
+      }
+    }
+  }
+  else if (rule.cssRules && rule.cssRules.length) {
+    for (const subRule of rule.cssRules) {
+      processRule(subRule);
+    }
+  }
+}
+function extractVarsFromValueNonFallBack(value, selector) {
+  if (!value) return;
+  let match;
+  const regex = /var\(\s*(---[^\s,()]+)\s*(?:,\s*((?:[^()]|\([^()]*\))*))?\)/g;
+  while ((match = regex.exec(value)) !== null) {
+    const varName = match[1];
+    const body = varName.slice(3);
+    const idx = body.lastIndexOf("--");
+    if (idx === -1) continue;
+    const elementName = body.slice(0, idx);
+    const property = body.slice(idx + 2);
+    specialVarsMap.push({ varName, elementName, property, selector });
+  }
+}
+function extractVarCalls(value) {
+  const results = [];
+  let pos = 0;
+  while (true) {
+    const start = value.indexOf("var(", pos);
+    if (start === -1) break;
+    let i = start + 4;
+    let depth = 1;
+    for (; i < value.length; i++) {
+      if (value[i] === "(") depth++;
+      else if (value[i] === ")") {
+        depth--;
+        if (depth === 0) break;
+      }
+    }
+    const inside = value.slice(start + 4, i); 
+    let comma = -1;
+    let d = 0;
+    for (let k = 0; k < inside.length; k++) {
+      const ch = inside[k];
+      if (ch === "(") d++;
+      else if (ch === ")") d--;
+      else if (ch === "," && d === 0) {
+        comma = k;
+        break;
+      }
+    }
+    const varName = (comma === -1 ? inside : inside.slice(0, comma)).trim();
+    const fallback = (comma === -1 ? null : inside.slice(comma + 1).trim());
+    results.push({ varName, fallback });
+    pos = i + 1;
+  }
+  return results;
+}
+function extractVarsFromValue(value, selector) {
+  if (!value) return;
+  let varsResult = extractVarCalls(value);
+  for (varR of varsResult) {
+    const fallback = varR.fallback;
+    const varName = varR.varName;
+    const body = varName.slice(3);
+    const idx = body.indexOf("--");
+    if (idx === -1) continue;
+    const elementName = body.slice(0, idx);
+    const property = body.slice(idx + 2);
+    addSpecialVar({ varName, elementName, property, selector, fallback })
+  }
+}
+function updateVariables() {
+  if (updatingVars) return;
+  updatingVars = true;
+  if (isSeperationArchitecture) {
+    for (const entry of specialVarsMap) {
+      let rEl = resolveElement(entry.elementName, true);
+      if (!rEl && document.body.classList.contains(entry.elementName))
+        rEl = document.body;
+      else if (!rEl) {
+        continue;
+      }
+      if (!rEl && entry.fallback) {
+        const regex = /var\(\s*(---[a-zA-Z0-9_-]+)\s*(?:,[^)]+)?\)/g;
+        const result = [...entry.fallback.matchAll(regex)].map(m => m[1]);
+        for (let index = 0; index < result.length; index++) {
+          const variable = result[index];
+          const body = variable.slice(3);
+          const idx = body.lastIndexOf("--");
+          if (idx === -1) continue;
+          const elementName = body.slice(0, idx);
+          const property = body.slice(idx + 2);
+          let selector = entry.selector;
+          let varName = variable;
+          let elem = resolveElement(elementName, true)
+          if (!elem && document.body.classList.contains(elementName))
+            elem = document.body
+          else if (!elem)
+            elem = resolveElement(elementName)
+          const rElemVal = resolveComputedValue(elem, property);
+          if (!elem) continue;
+          if (rElemVal != null) document.documentElement.style.setProperty(variable, rElemVal);
+          addSpecialVar({ varName, elementName, property, selector })
+        }
+        continue;
+      }
+      const rVal = resolveComputedValue(rEl, entry.property);
+      if (entry._last === rVal) continue;
+      if (rVal != null) {
+        document.documentElement.style.setProperty(entry.varName, rVal);
+        entry._last = rVal;
+      }
+    }
+  }
+  else {
+    for (const entry of specialVarsMap) {
+      let rEl = resolveElement(entry.elementName);
+      if (!rEl && entry.fallback) {
+        const regex = /var\(\s*(---[a-zA-Z0-9_-]+)\s*(?:,[^)]+)?\)/g;
+        const result = [...entry.fallback.matchAll(regex)].map(m => m[1]);
+        for (let index = 0; index < result.length; index++) {
+          const variable = result[index];
+          const body = variable.slice(3);
+          const idx = body.lastIndexOf("--");
+          if (idx === -1) continue;
+          const elementName = body.slice(0, idx);
+          const property = body.slice(idx + 2);
+          let selector = entry.selector;
+          let varName = variable;
+          const elem = resolveElement(elementName)
+          const rElemVal = resolveComputedValue(elem, property);
+          if (!elem) continue;
+          if (rElemVal != null) document.documentElement.style.setProperty(variable, rElemVal);
+          document.documentElement.style.setProperty(varName, rElemVal);
+          addSpecialVar({ varName, elementName, property, selector })
+        }
+        continue;
+      }
+      const rVal = resolveComputedValue(rEl, entry.property);
+      if (!rEl) continue;
+      if (rVal != null) document.documentElement.style.setProperty(entry.varName, rVal);
+    }
+  }
+  updatingVars = false;
+}
+function resolveElement(name, currentDeviceSelector = false) {
+  if (!name) return null; let firstElMode = "class";
+  if (name.startsWith("___")) { firstElMode = "tag"; name = name.slice(3); }
+  else if (name.startsWith("____")) { firstElMode = "id"; name = name.slice(4); }
+  const parts = []; let current = "";
+  let mode = null;
+  for (let i = 0; i < name.length;) {
+    if (name.startsWith("_____", i)) {
+      if (current)
+        parts.push({ mode, value: current });
+      mode = "id";
+      current = "";
+      i += 5;
+    }
+    else if (name.startsWith("____", i)) {
+      if (current)
+        parts.push({ mode, value: current });
+      mode = "tag";
+      current = "";
+      i += 4;
+    }
+    else if (name.startsWith("___", i)) {
+      if (current)
+        parts.push({ mode, value: current });
+      mode = "class";
+      current = "";
+      i += 3;
+    }
+    else { current += name[i++]; }
+  } if (current)
+    parts.push({ mode, value: current });
+  if (!parts.length)
+    return null;
+  const first = parts.shift();
+  let el;
+  if (!currentDeviceSelector) {
+    switch (firstElMode) {
+      case "tag": el = document.querySelector(first.value);
+        break;
+      case "id":
+        el = document.querySelector("#" + first.value);
+        break;
+      case "class": el = document.querySelector("." + first.value);
+        break;
+    }
+  }
+  else {
+    let currentDevice = getCurrentDeviceElement();
+    switch (firstElMode) {
+      case "tag": el = currentDevice.querySelector(first.value);
+        break; case "id": el = currentDevice.querySelector("#" + first.value);
+        break; case "class": el = currentDevice.querySelector("." + first.value);
+        break;
+    }
+  }
+  if (!el)
+    return null;
+  for (const p of parts) {
+    if (!p.value) continue;
+    const selectors = {
+      class: "." + p.value,
+      tag: p.value,
+      id: "#" + p.value
+    };
+    let sel;
+    if (p.mode === "class") {
+      sel = selectors.class;
+    } else if (p.mode === "tag") {
+      sel = selectors.tag;
+    } else {
+      sel = selectors.id;
+    }
+    let next = el.querySelector(sel);
+    if (!next) {
+      if (p.mode === "class") {
+        next = el.querySelector(selectors.tag);
+        if (!next) next = el.querySelector(selectors.id);
+      } else if (p.mode === "tag") {
+        next = el.querySelector(selectors.id);
+      }
+    }
+    if (!next) return null;
+    el = next;
+  }
+  return el;
+}
+function resolveComputedValue(el, prop) {
+  if (!el) return null;
+  switch (prop) {
+    case "CRH": return el.getBoundingClientRect().height + "px";
+    case "CRW": return el.getBoundingClientRect().width + "px";
+    case "CRT": return el.getBoundingClientRect().top + "px";
+    case "CRB": return el.getBoundingClientRect().bottom + "px";
+    case "CRX": return el.getBoundingClientRect().x + "px";
+    case "CRY": return el.getBoundingClientRect().y + "px";
+    case "CRR": return el.getBoundingClientRect().right + "px";
+    case "CRL": return el.getBoundingClientRect().left + "px";
+    case "CH": return el.clientHeight + "px";
+    case "CW": return el.clientWidth + "px";
+    case "CT": return el.clientTop + "px";
+    case "CL": return el.clientLeft + "px";
+    case "SH": return el.scrollHeight + "px";
+    case "SW": return el.scrollWidth + "px";
+    case "ST": return el.scrollTop + "px";
+    case "SL": return el.scrollLeft + "px";
+    case "OH": return el.offsetHeight + "px";
+    case "OW": return el.offsetWidth + "px";
+    case "OT": return el.offsetTop + "px";
+    case "OL": return el.offsetLeft + "px";
+  }
+  const cs = getComputedStyle(el);
+  let val = cs.getPropertyValue(prop);
+  if (val && val.trim()) return val.trim();
+  const camel = prop.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  val = cs[camel];
+  if (val && String(val).trim()) return String(val).trim();
+  switch (prop) {
+    case "padding": return cs.padding;
+    case "margin": return cs.marginTop;
+    case "border-width":
+    case "border": return cs.borderTopWidth;
+  }
+  return null;
+}
+let scheduled = false;
+function scheduleUpdateVariables() {
+  if (scheduled) return;
+  scheduled = true;
+  requestAnimationFrame(() => {
+    scheduled = false;
+    updateVariables();
+  });
+}
+const observer = new MutationObserver(scheduleUpdateVariables);
+let domResizeObserver = new ResizeObserver(scheduleUpdateVariables);
+let setupDone = false;
+async function initalSetup() {
+  if (urlArray.length <= 0) {
+    setupSpecialVarsInternal();
+  } else {
+    await setupSpecialVarsExternal();
+  }
+  setupDone = true;
+}
+function attachObservers() {
+  observer.observe(target, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["style", "class"]
+  });
+  domResizeObserver.observe(document.documentElement);
+  window.addEventListener("orientationchange", scheduleUpdateVariables);
+  if (document.fonts) {
+    document.fonts.ready.then(scheduleUpdateVariables);
+    document.fonts.addEventListener("loadingdone", scheduleUpdateVariables);
+  }
+}
+window.addEventListener("load", async () => {
+  document.body.style.height = window.innerHeight + "px";
+  await initalSetup();
+  attachObservers();
+});
+window.addEventListener("load", () => {
+  document.body.style.height = window.innerHeight + "px";
+  if (urlArray.length <= 0) {
+    setupSpecialVarsInternal();
+  }
+  else {
+    setupSpecialVarsExternal().then(() => {
+    });
+  }
+  observer.observe(target, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["style", "class"],
+    attributeOldValue: true,
+  });
+  if (document.fonts) {
+    document.fonts.ready.then(scheduleUpdateVariables);
+  }
+  domResizeObserver.observe(document.documentElement);
+  window.addEventListener("orientationchange", scheduleUpdateVariables)
+  if (document.fonts)
+    document.fonts.addEventListener("loadingdone", scheduleUpdateVariables);
+});
+window.addEventListener("resize", () => {
+  document.body.style.height = window.innerHeight + "px";
+  scheduleUpdateVariables();
+})
+function getCurrentDevice() {
+  let lays = document.querySelectorAll(".\\@page-layout")
+  for (let index = 0; index < lays.length; index++) {
+    const lay = lays[index];
+    if (getComputedStyle(lay).display == "contents") {
+      return lay.getAttribute("data-layout");
+    }
+  }
+  return null;
+}
+function getCurrentDeviceElement() {
+  let lays = document.querySelectorAll(".\\@page-layout")
+  for (let index = 0; index < lays.length; index++) {
+    const lay = lays[index];
+    if (getComputedStyle(lay).display == "contents") {
+      return lay
+    }
+  }
+  return null;
+}
+function parseCss(cssText) {
+  const blockRegex = /([^{]+)\{([^}]+)\}/g;
+  const propRegex = /([\w-]+)\s*:\s*([^;]+);?/g;
+  let blockMatch;
+  while ((blockMatch = blockRegex.exec(cssText)) !== null) {
+    const selector = blockMatch[1].trim();
+    const block = blockMatch[2].trim();
+    let propMatch;
+    while ((propMatch = propRegex.exec(block)) !== null) {
+      const propValue = propMatch[2].trim();
+      if (propValue.includes("var(---")) {
+        let engineMatch;
+        const regexPattern = /var\((---[^),\s]+)/g;
+        while ((engineMatch = regexPattern.exec(propValue)) !== null) {
+          console.log(engineMatch[1])
+          const varName = engineMatch[1];
+          const body = varName.slice(3);
+          const idx = body.lastIndexOf("--");
+          if (idx === -1) continue;
+          const elementName = body.slice(0, idx);
+          const property = body.slice(idx + 2);
+          let metaData = document.documentElement.style.getPropertyValue("----meta");
+          let currentDevice = getCurrentDevice();
+          const escaped = varName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const regex = new RegExp(`<---${escaped}>([^<]*)<>`);
+          const match = metaData.match(regex);
+          const propDevice = match ? match[1] : null;
+          if (propDevice == currentDevice) {
+
+            const el = resolveElement(elementName);
+            if (!el) continue;
+            const val = resolveComputedValue(el, property);
+            if (val != null) document.documentElement.style.setProperty(varName, val);
+          }
+          const el = resolveElement(elementName);
+          if (!el) continue;
+          const val = resolveComputedValue(el, property);
+          if (val != null) document.documentElement.style.setProperty(varName, val);
+          specialVarsMap.push({ varName, elementName, property, selector });
+        }
+      }
+    }
+  }
+}
+const target = document.body;      
+
+        
+const defaultEditingValues = {
+    "brightness": 200,
+    "contrast": 100,
+    "saturate": 100,
+    "grayscale": 0,
+    "sepia": 0,
+    "hueRotate": 0,
+    "invert": 0,
+    "blur": 0,
+    "opacity": 100
+}
+const appPages = {
+    "photoPrint": "PHOTO_PRINT",
+}
+const passportSizePhotoFilters = {
+    "brightness": "BRIGHTNESS",
+    "contrast": "CONTRAST",
+    "saturate": "SATURATE",
+    "grayscale": "GRAYSCALE",
+    "sepia": "SEPIA",
+    "hueRotate": "HUE_ROTATE",
+    "invert": "INVERT",
+    "blur": "BLUR",
+    "opacity": "OPACITY"
+}
+function openPage(appPage) {
+    document.querySelectorAll("._main-page").forEach(page => {
+        let val = page.getAttribute("data-app-page");
+        if (val == appPage) 
+            page.style.display = "flex";
+    })
+}
+
+openPage(appPages.photoPrint)
+
+function getCropperById(id) {
+    let cropper = null;
+    document.querySelectorAll(".image-cropper").forEach(ic => {
+        let uId = ic.getAttribute("data-guid");
+        if (uId == id) {
+cropper = ic;
+        }
+    })
+    return cropper;
+}
+function createPassportSizeCropper(url) {
+    let guid = generateId();
+    const imageCropper = document.createElement("section");
+imageCropper.className = "image-cropper";
+imageCropper.id = "image-cropper";
+imageCropper.dataset.guid = guid;
+
+const controlNav = document.createElement("section");
+controlNav.className = "image-cropper-control-nav";
+imageCropper.appendChild(controlNav);
+
+const btnS = document.createElement("button");
+btnS.textContent = "X";
+controlNav.appendChild(btnS);
+btnS.setAttribute("onclick" , "skipCrop(this)")
+
+const btnConfirm = document.createElement("button");
+btnConfirm.id = "confirm";
+btnConfirm.textContent = "C";
+controlNav.appendChild(btnConfirm);
+const nav = document.createElement("section");
+nav.className = "image-cropper-nav";
+imageCropper.appendChild(nav);
+
+const heightSection = document.createElement("section");
+heightSection.className = "btn";
+heightSection.setAttribute("data-property", "height");
+nav.appendChild(heightSection);
+
+const heightH1 = document.createElement("h1");
+heightH1.innerHTML = 'Height: <span>500 </span> pixel';
+heightSection.appendChild(heightH1);
+
+const heightInput = document.createElement("input");
+heightInput.setAttribute("type", "text");
+heightInput.setAttribute("oninput", "adjustCropper(this)");
+heightSection.appendChild(heightInput);
+
+const widthSection = document.createElement("section");
+widthSection.className = "btn";
+widthSection.setAttribute("data-property", "width");
+nav.appendChild(widthSection);
+
+const widthH1 = document.createElement("h1");
+widthH1.innerHTML = 'Width: <span>430</span> pixel';
+widthSection.appendChild(widthH1);
+
+const widthInput = document.createElement("input");
+widthInput.setAttribute("type", "text");
+widthInput.value = "430"
+widthInput.setAttribute("oninput", "adjustCropper(this)");
+widthSection.appendChild(widthInput);
+heightInput.value = "500"
+const cropperArea = document.createElement("section");
+cropperArea.className = "image-cropper-area";
+imageCropper.appendChild(cropperArea);
+
+const cropperFixed = document.createElement("section");
+cropperFixed.className = "cropper-fixed";
+cropperFixed.setAttribute("style", "height: 500px; width: 430px;");
+cropperArea.appendChild(cropperFixed);
+
+const imgCropper = document.createElement("img");
+imgCropper.id = "image";
+imgCropper.setAttribute("src", url);
+imgCropper.setAttribute("alt", "");
+cropperFixed.appendChild(imgCropper);
+document.body.appendChild(imageCropper);
+const cropper = cropperFixed;
+const img = imgCropper;
+const confirmBtn = btnConfirm;
+
+let scale = 1;
+let minScale = 0.1; // Very small minimum scale for unlimited zoom out
+let maxScale = 5;
+let x = 0;
+let y = 0;
+
+let dragging = false;
+let startMouseX = 0;
+let startMouseY = 0;
+let startX = 0;
+let startY = 0;
+
+// Touch/pinch zoom variables
+let initialPinchDistance = 0;
+let initialScale = 1;
+
+// ----------------- CORE UTILS -----------------
+
+function clamp() {
+  const cw = cropper.clientWidth;
+  const ch = cropper.clientHeight;
+  const iw = img.naturalWidth * scale;
+  const ih = img.naturalHeight * scale;
+
+  x = Math.min(0, Math.max(cw - iw, x));
+  y = Math.min(0, Math.max(ch - ih, y));
+}
+
+function update() {
+  clamp();
+  img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+}
+
+// ----------------- IMAGE LOAD -----------------
+
+img.onload = () => {
+  const cw = cropper.clientWidth;
+  const ch = cropper.clientHeight;
+
+  // Start with a scale that fits the image nicely in the cropper
+  scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+
+  x = (cw - img.naturalWidth * scale) / 2;
+  y = (ch - img.naturalHeight * scale) / 2;
+
+  update();
+};
+
+// ----------------- EXTERNAL FUNCTIONS -----------------
+
+function moveBy(dx, dy) {
+  x += dx;
+  y += dy;
+  update();
+}
+
+function setPosition(newX, newY) {
+  x = newX;
+  y = newY;
+  update();
+}
+
+// NEW: Move to absolute position relative to current scale
+function moveTo(dx, dy) {
+  x = dx;
+  y = dy;
+  update();
+}
+
+function zoomBy(deltaScale, anchorX = cropper.clientWidth / 2, anchorY = cropper.clientHeight / 2) {
+  const newScale = Math.min(maxScale, Math.max(minScale, scale + deltaScale));
+  x -= anchorX * (newScale / scale - 1);
+  y -= anchorY * (newScale / scale - 1);
+  scale = newScale;
+  update();
+}
+
+function setScale(newScale, anchorX = cropper.clientWidth / 2, anchorY = cropper.clientHeight / 2) {
+  const clampedScale = Math.min(maxScale, Math.max(minScale, newScale));
+  x -= anchorX * (clampedScale / scale - 1);
+  y -= anchorY * (clampedScale / scale - 1);
+  scale = clampedScale;
+  update();
+}
+
+// NEW: Zoom to absolute scale value (doesn't add to current scale)
+function zoomTo(newScale, anchorX = cropper.clientWidth / 2, anchorY = cropper.clientHeight / 2) {
+  const clampedScale = Math.min(maxScale, Math.max(minScale, newScale));
+  x -= anchorX * (clampedScale / scale - 1);
+  y -= anchorY * (clampedScale / scale - 1);
+  scale = clampedScale;
+  update();
+}
+
+function getCrop() {
+  const cw = cropper.clientWidth;
+  const ch = cropper.clientHeight;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = cw;
+  canvas.height = ch;
+  const ctx = canvas.getContext('2d');
+
+  ctx.drawImage(
+    img,
+    -x / scale,
+    -y / scale,
+    cw / scale,
+    ch / scale,
+    0,
+    0,
+    cw,
+    ch
+  );
+
+  return new Promise(resolve => {
+    canvas.toBlob(blob => {
+      resolve(URL.createObjectURL(blob));
+    }, 'image/png');
+  });
+}
+
+// ----------------- HELPER FUNCTIONS -----------------
+
+function getDistance(touch1, touch2) {
+  const dx = touch1.clientX - touch2.clientX;
+  const dy = touch1.clientY - touch2.clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function getCenter(touch1, touch2) {
+  return {
+    x: (touch1.clientX + touch2.clientX) / 2,
+    y: (touch1.clientY + touch2.clientY) / 2
+  };
+}
+
+// ----------------- MOUSE DRAG HANDLING -----------------
+
+cropper.addEventListener('mousedown', e => {
+  dragging = true;
+  startMouseX = e.clientX;
+  startMouseY = e.clientY;
+  startX = x;
+  startY = y;
+});
+
+window.addEventListener('mouseup', () => dragging = false);
+
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  moveBy(e.clientX - startMouseX, e.clientY - startMouseY);
+  startMouseX = e.clientX;
+  startMouseY = e.clientY;
+  startX = x;
+  startY = y;
+});
+
+// ----------------- TOUCH DRAG AND PINCH HANDLING -----------------
+
+cropper.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    // Single touch - start dragging
+    dragging = true;
+    startMouseX = e.touches[0].clientX;
+    startMouseY = e.touches[0].clientY;
+    startX = x;
+    startY = y;
+  } else if (e.touches.length === 2) {
+    // Two fingers - start pinch zoom
+    dragging = false;
+    initialPinchDistance = getDistance(e.touches[0], e.touches[1]);
+    initialScale = scale;
+  }
+});
+
+cropper.addEventListener('touchmove', e => {
+  e.preventDefault();
+  
+  if (e.touches.length === 1 && dragging) {
+    // Single touch - drag
+    moveBy(e.touches[0].clientX - startMouseX, e.touches[0].clientY - startMouseY);
+    startMouseX = e.touches[0].clientX;
+    startMouseY = e.touches[0].clientY;
+    startX = x;
+    startY = y;
+  } else if (e.touches.length === 2) {
+    // Two fingers - pinch zoom
+    const currentDistance = getDistance(e.touches[0], e.touches[1]);
+    const center = getCenter(e.touches[0], e.touches[1]);
+    const rect = cropper.getBoundingClientRect();
+    
+    const newScale = initialScale * (currentDistance / initialPinchDistance);
+    const anchorX = center.x - rect.left;
+    const anchorY = center.y - rect.top;
+    
+    setScale(newScale, anchorX, anchorY);
+  }
+}, { passive: false });
+
+cropper.addEventListener('touchend', e => {
+  if (e.touches.length < 2) {
+    initialPinchDistance = 0;
+  }
+  if (e.touches.length === 0) {
+    dragging = false;
+  }
+});
+
+// ----------------- WHEEL ZOOM -----------------
+
+cropper.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoomBy(-e.deltaY * 0.001, e.clientX - cropper.getBoundingClientRect().left, e.clientY - cropper.getBoundingClientRect().top);
+}, { passive: false });
+
+// ----------------- CONFIRM -----------------
+
+confirmBtn.addEventListener('click', async () => {
+  const url = await getCrop();
+  let userInput = prompt("How many copies do you want?");
+  let copies = Number(userInput);
+  let urls = [];
+  for (let index = 1; index <= copies; index++) {
+    urls.push(url);
+  }
+  addToPreview(urls);
+  destroyCropper(guid);
+});
+ return guid;
+}
+function destroyCropper(id) {
+   let cropper = getCropperById(id);
+   cropper.remove();
+}
+document.getElementById("upload-passport-size-photo").addEventListener("input" , (e) => {
+let files = e.target.files;
+let fileUrls = [];
+for (const file of files) {
+    let url = URL.createObjectURL(file);
+ fileUrls.push(url);
+ createPassportSizeCropper(url);
+}
+
+// addToPreview(fileUrls)
+
+})
+let targetedImages = [];
+let multiSelect = false;
+function addToPreview(urls = []) {
+    for (const url of urls) {
+        let img = document.createElement("img");
+        img.src = url;
+       let a4 = document.getElementById("passport-size-photo-a4");
+       img.id = generateId();
+       img.style.filter = `brightness(${defaultEditingValues.brightness}%) contrast(${defaultEditingValues.contrast}%) saturate(${defaultEditingValues.saturate}%) grayscale(${defaultEditingValues.grayscale}%) sepia(${defaultEditingValues.sepia}%) hue-rotate(${defaultEditingValues.hueRotate}deg) invert(${defaultEditingValues.invert}%) blur(${defaultEditingValues.blur}px) opacity(${defaultEditingValues.opacity}%)`
+      a4.appendChild(img);
+      img.addEventListener("click" , () => {
+        selectImage(img)
+      })
+    }
+}
+function selectImage(img ) {
+    let appendElement = document.getElementById("preview-select-show");
+if (multiSelect) {
+   let check = targetedImages.find(i => i.id == img.id);
+   if (check) 
+    return
+   let clone = img.cloneNode(true);
+   appendElement.appendChild(clone);
+   targetedImages.push(img);
+   targetedImages.push(clone);
+}
+else {
+    let check = targetedImages.find(i => i.id == img.id);
+   if (check) 
+    return
+    let clone = img.cloneNode(true);
+    appendElement.querySelectorAll("img").forEach(i => i.remove());
+    appendElement.appendChild(clone);
+    targetedImages = [img , clone]
+}
+
+updateInfo();
+}
+
+function updateInfo() {
+    let targetedImagesCount = document.getElementById("selected-count")
+    let previewImages = targetedImages.filter(ti => ti.closest("#preview-select-show"));
+    targetedImagesCount.textContent = previewImages.length;
+}
+function selectMultiplePassportPhoto(ele) {
+multiSelect = true;
+ele.style.background = "red"
+ele.setAttribute("onclick" , "unselectMultiplePhoto(this)")
+}
+
+function unselectMultiplePhoto(ele) {
+    multiSelect = false;
+    ele.setAttribute("onclick" , "selectMultiplePassportPhoto(this)")
+ele.style.removeProperty("background");
+}
+
+function adjustFilter(ele) {
+    let slider = ele.closest("._slider");
+    let property = slider.getAttribute("data-filter");
+    let val = ele.value;
+    
+    if (property == passportSizePhotoFilters.brightness) {
+        targetedImages.forEach(i => {
+            setFilter(i, "brightness", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.contrast) {
+        targetedImages.forEach(i => {
+            setFilter(i, "contrast", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.saturate) {
+        targetedImages.forEach(i => {
+            setFilter(i, "saturate", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.grayscale) {
+        targetedImages.forEach(i => {
+            setFilter(i, "grayscale", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.sepia) {
+        targetedImages.forEach(i => {
+            setFilter(i, "sepia", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.hueRotate) {
+        targetedImages.forEach(i => {
+            setFilter(i, "hue-rotate", `${val}deg`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.invert) {
+        targetedImages.forEach(i => {
+            setFilter(i, "invert", `${val}%`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.blur) {
+        targetedImages.forEach(i => {
+            setFilter(i, "blur", `${val}px`)
+        })
+    }
+    else if (property == passportSizePhotoFilters.opacity) {
+        targetedImages.forEach(i => {
+            setFilter(i, "opacity", `${val}%`)
+        })
+    }
+    
+    slider.querySelector("._slider-value").textContent = val;
+}
+function setFilter(el, name, value) {
+    const filters = el.style.filter
+        .split(/\s+/)
+        .filter(f => f && !f.startsWith(name + "("));
+
+    filters.push(`${name}(${value})`);
+    el.style.filter = filters.join(" ");
+}
+async function removeBg() {
+    const seen = new Set();
+
+const uniqueImages = targetedImages.filter(img => {
+  if (seen.has(img.src)) return false;
+  seen.add(img.src);
+  return true;
+});
+for (const img of uniqueImages) {
+   let url = await removeBackground(img);
+   targetedImages.filter(ti => ti.src == img.src).forEach(i => {
+    i.src = url;
+   })
+}
+}
+
+document.getElementById("passport-size-remove-background-btn").addEventListener("click" , async () =>{
+    removeBg()
+})
+async function removeBackground(imgEl) {
+  if (!(imgEl instanceof HTMLImageElement)) {
+    throw new Error("Expected an HTMLImageElement");
+  }
+  let solidColor = document.getElementById("passport-size-remove-background").value;
+
+  const API_KEY = "8L5Q2YH2RE9mZ3wty76D8YvY";
+
+  // Fetch the image as a blob (works for same-origin or CORS-enabled images)
+  const imgResponse = await fetch(imgEl.src);
+  const imgBlob = await imgResponse.blob();
+
+  const formData = new FormData();
+  formData.append("image_file", imgBlob);
+  formData.append("size", "auto");
+  formData.append("bg_color", solidColor.replace("#" , "")); // solid blue background
+
+  const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+    method: "POST",
+    headers: {
+      "X-Api-Key": API_KEY
+    },
+    body: formData
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`remove.bg failed: ${err}`);
+  }
+
+  const resultBlob = await response.blob();
+
+  // Create a usable URL for the processed image
+  return URL.createObjectURL(resultBlob);
+}
+
+function clearTargetImages() {
+    targetedImages = [];
+    updateInfo();
+let appendElement = document.getElementById("preview-select-show");
+appendElement.querySelectorAll("img").forEach(r => r.remove())
+}
+function deleteTargetImages() {
+    targetedImages.forEach(ti => {
+ti.remove();
+    })
+    updateInfo();
+}
+function clearA4Paper() {
+    let a4Images = document.querySelectorAll("#passport-size-photo-a4 img");
+    a4Images.forEach(img => {
+
+        document.querySelectorAll("#preview-select-show img").forEach(i => {
+            if (i.id == img.id) {
+                i.remove();
+            }
+            })
+            img.remove();
+        })
+        updateInfo();
+}
+function passPortPhotoPrint() {
+    let a4 = document.getElementById("passport-size-photo-a4");
+    let finalString = "";
+    a4.querySelectorAll("img").forEach(img => {
+finalString += `<img src="${img.src}" style="filter: ${img.style.filter};">`;
+    })
+     const printWindow = window.open("" , "_blank");
+      printWindow.document.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        * {
+            margin: 0 ;
+            padding: 0;
+        }
+     body {
+        background-color: white !important;
+     }
+        .preview-photos img {
+                width: calc((100% / 6) - 8px);
+    height: calc((100% / 7) - 4px);
+    margin: 4px !important;
+    margin-bottom: 4px !important;
+        }
+        .preview-photos {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: start;
+            width: 100dvw;
+            height: 100dvh;
+        }
+    </style>
+</head>
+<body>
+    <section class="preview-photos" id="passport-size-photo-a4">
+${finalString}
+</section>
+    
+</body>
+</html>`)
+
+    printWindow.document.close();
+        printWindow.onload = function() {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    };
+}
+function selectAllPreview() {
+    let a4 = document.getElementById("passport-size-photo-a4");
+    targetedImages = [];
+    multiSelect = true;
+    a4.querySelectorAll("img").forEach(i => {
+        selectImage(i)
+        targetedImages.push(i)
+    })
+    multiSelect = false;
+    
+}
+function openCropper(imgUrl) {
+   let cropper = document.getElementById("image-cropper");
+   cropper.style.display = "flex";
+   cropper.querySelector("#image").src = imgUrl;
+}
+
+function adjustCropper(ele) {
+    let btn = ele.closest(".btn");
+    let property = btn.getAttribute("data-property");
+    let val = ele.value == "" || ele.value == null ? "0" : ele.value;
+   let id = ele.closest(".image-cropper").getAttribute("data-guid");
+  let cropper = getCropperById(id);
+    if (property == "height") {
+  cropper.querySelector(".cropper-fixed").style.height = val + 'px'  ;
+    }
+    else if (property == "width") {
+        cropper.querySelector(".cropper-fixed").style.width = val + 'px'  ;
+    }
+
+    btn.querySelector("span").textContent = val;
+
+}
+function skipCrop(ele) {
+   let id = ele.closest(".image-cropper").getAttribute("data-guid");
+  let cropper = getCropperById(id);
+  cropper.remove();
+}
+
+function generateId(letterCount = 4, numberCount = 6) {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const numbers = '0123456789';
+
+  let result = '';
+
+  for (let i = 0; i < letterCount; i++) {
+    result += letters[Math.floor(Math.random() * letters.length)];
+  }
+
+  for (let i = 0; i < numberCount; i++) {
+    result += numbers[Math.floor(Math.random() * numbers.length)];
+  }
+
+  return result;
+}
+
+    </script>
+</body>
+</html>
+
+ <!--preview rotate ho toh view ma dikhe center ma rhe
+ and cropper ko valeue mile itna sa rotate kar ke crop karna hai  -->
