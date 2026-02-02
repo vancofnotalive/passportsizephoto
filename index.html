@@ -404,6 +404,7 @@ opacity: 0;
         display: flex;
             flex-wrap: wrap;
             align-content: start;
+            
 }
 .printer-print img {
         width: calc((100% / 6) - 8px);
@@ -412,10 +413,50 @@ opacity: 0;
     margin-bottom: 4px !important;
 }
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
 
+ .printer-print-ui * {
+    visibility: visible;
+  }
+ .printer-print-ui{
+    visibility: visible;
+  }
+
+  .printer-print-ui {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+.creation-ui {
+    display: contents;
+}
+.printer-print-ui {
+        display: flex;
+            flex-wrap: wrap;
+            align-content: start !important;
+            align-items: flex-start;
+            justify-content: start;
+            height: 100dvh;
+            width: 100dvw;
+            visibility: hidden;
+}
+.printer-print-ui img {
+       width: calc((100% / 6) - 8px);
+    height: calc((100% / 7) - 4px);
+    margin: 4px !important;
+    margin-bottom: 4px !important;
+    margin-top: 0 !important;
+}
     </style>
 </head>
 <body class="page" id="page">
+    <section class="creation-ui">
+
     
     <!-- <section class="image-cropper" id="image-cropper">
         <section class="image-cropper-control-nav">
@@ -529,7 +570,10 @@ Selected: <span id="selected-count"></span>
 </section>
 </section>
   </section>
+</section>
+<section class="printer-print-ui">
 
+</section>
 
     <script>
       let urlArray = [];
@@ -1578,55 +1622,12 @@ function passPortPhotoPrint() {
 finalString += `<img src="${img.src}" style="filter: ${img.style.filter};">`;
 
     })
- 
-     
-      ui = document.documentElement.innerHTML;
-     
-     document.documentElement.innerHTML =`
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <style>
-        * {
-            margin: 0 ;
-            padding: 0;
-        }
-     body {
-        background-color: white !important;
-     }
-        .preview-photos img {
-                width: calc((100% / 6) - 8px);
-    height: calc((100% / 7) - 4px);
-    margin: 4px !important;
-    margin-bottom: 4px !important;
-        }
-        .preview-photos {
-            display: flex;
-            flex-wrap: wrap;
-            align-content: start;
-            width: 100dvw;
-            height: 100dvh;
-        }
-    </style>
-</head>
-<body>
-    <section class="preview-photos" id="passport-size-photo-a4">
-${finalString}
-</section>
 
-</body>
-`
-    setTimeout(() => {
+  document.querySelector(".printer-print-ui").innerHTML = finalString;
 
-    window.print();
-}, 1000)
+  window.print();
 }
-window.addEventListener("afterprint", () => {
-  
-  document.documentElement.innerHTML = ui;
-});
+
 function selectAllPreview() {
     let a4 = document.getElementById("passport-size-photo-a4");
     targetedImages = [];
