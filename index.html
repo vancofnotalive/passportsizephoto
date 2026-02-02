@@ -395,10 +395,28 @@ opacity: 0;
   pointer-events: none;
   
 }
+.printer-print {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: +999999999999999999999999999999999;
+        display: flex;
+            flex-wrap: wrap;
+            align-content: start;
+}
+.printer-print img {
+        width: calc((100% / 6) - 8px);
+    height: calc((100% / 7) - 4px);
+    margin: 4px !important;
+    margin-bottom: 4px !important;
+}
+
 
     </style>
 </head>
 <body class="page" id="page">
+    
     <!-- <section class="image-cropper" id="image-cropper">
         <section class="image-cropper-control-nav">
             <button>S</button>
@@ -992,7 +1010,7 @@ const target = document.body;
 
         
 const defaultEditingValues = {
-    "brightness": 100,
+    "brightness": 200,
     "contrast": 100,
     "saturate": 100,
     "grayscale": 0,
@@ -1539,6 +1557,7 @@ ti.remove();
     })
     updateInfo();
 }
+let ui = "";
 function clearA4Paper() {
     let a4Images = document.querySelectorAll("#passport-size-photo-a4 img");
     a4Images.forEach(img => {
@@ -1557,10 +1576,13 @@ function passPortPhotoPrint() {
     let finalString = "";
     a4.querySelectorAll("img").forEach(img => {
 finalString += `<img src="${img.src}" style="filter: ${img.style.filter};">`;
+
     })
-     const printWindow = window.open("" , "_blank");
-      printWindow.document.write(`<!DOCTYPE html>
-<html lang="en">
+ 
+     
+      ui = document.documentElement.innerHTML;
+     
+     document.documentElement.innerHTML =`
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1593,17 +1615,15 @@ finalString += `<img src="${img.src}" style="filter: ${img.style.filter};">`;
     <section class="preview-photos" id="passport-size-photo-a4">
 ${finalString}
 </section>
-    
-</body>
-</html>`)
 
-    printWindow.document.close();
-        printWindow.onload = function() {
-        printWindow.focus();
-        printWindow.print();
-        printWindow.close();
-    };
+</body>
+`
+window.print();
 }
+window.addEventListener("afterprint", () => {
+  
+  document.documentElement.innerHTML = ui;
+});
 function selectAllPreview() {
     let a4 = document.getElementById("passport-size-photo-a4");
     targetedImages = [];
