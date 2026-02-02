@@ -1618,7 +1618,10 @@ ${finalString}
 
 </body>
 `
-window.print();
+    setTimeout(() => {
+
+    window.print();
+}, 1000)
 }
 window.addEventListener("afterprint", () => {
   
