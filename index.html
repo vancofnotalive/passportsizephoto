@@ -449,11 +449,19 @@ opacity: 0;
             visibility: hidden;
 }
 .printer-print-ui img {
-       width: calc((100% / 6) - 16px);
-    height: calc((100% / 7) - 8px);
-    margin: 8px !important;
-    margin-bottom: 8px !important;
-    margin-top: 0 !important;
+    width: calc((100% - (8px * 5)) / 6);  /* Total width minus 5 gaps, divided by 6 */
+    height: calc((100% - (8px * 6)) / 7);  /* Total height minus 6 gaps, divided by 7 */
+    margin: 0 !important;
+    margin-left: 8px !important;
+    margin-top: 8px !important;
+}
+
+.printer-print-ui img:nth-child(6n+1) {
+    margin-left: 0 !important;  /* Remove left margin from first column */
+}
+
+.printer-print-ui img:nth-child(-n+6) {
+    margin-top: 0 !important;  /* Remove top margin from first row */
 }
 .select-multiple-btn {
   background-color: rgb(13, 121, 121);
@@ -1723,10 +1731,13 @@ function generateImage() {
     const A4_WIDTH = 2480;  // 210mm at 300 DPI
     const A4_HEIGHT = 3508; // 297mm at 300 DPI
     
-    // Layout settings - matching your CSS
+    // Paper margin (white border around the entire page)
+    const PAPER_MARGIN = 15; // Adjust this value for more/less margin
+    
+    // Layout settings
     const IMAGES_PER_ROW = 6;
     const TOTAL_ROWS = 7;
-    const IMAGE_MARGIN = 8; // From your CSS: margin: 4px !important;
+    const IMAGE_MARGIN = 8; // Inner margin between images
     
     // Create a canvas with A4 dimensions
     const canvas = document.createElement('canvas');
@@ -1738,9 +1749,17 @@ function generateImage() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, A4_WIDTH, A4_HEIGHT);
     
-    // Calculate image dimensions based on CSS: width: calc((100% / 6) - 8px); height: calc((100% / 7) - 4px);
-    const imageWidth = (A4_WIDTH / IMAGES_PER_ROW) - (IMAGE_MARGIN * 2);
-    const imageHeight = (A4_HEIGHT / TOTAL_ROWS) - (IMAGE_MARGIN * 2);
+    // Calculate available space after paper margins
+    const availableWidth = A4_WIDTH - (PAPER_MARGIN * 2);
+    const availableHeight = A4_HEIGHT - (PAPER_MARGIN * 2);
+    
+    // Calculate total margin space between images
+    const totalHorizontalMargin = (IMAGES_PER_ROW - 1) * IMAGE_MARGIN;
+    const totalVerticalMargin = (TOTAL_ROWS - 1) * IMAGE_MARGIN;
+    
+    // Calculate image dimensions
+    const imageWidth = (availableWidth - totalHorizontalMargin) / IMAGES_PER_ROW;
+    const imageHeight = (availableHeight - totalVerticalMargin) / TOTAL_ROWS;
     
     // Draw each image onto the canvas
     const images = a4.querySelectorAll("img");
@@ -1752,9 +1771,9 @@ function generateImage() {
             const row = Math.floor(index / IMAGES_PER_ROW);
             const col = index % IMAGES_PER_ROW;
             
-            // Calculate position - matching your CSS margin layout
-            const x = col * (imageWidth + (IMAGE_MARGIN * 2)) + IMAGE_MARGIN;
-            const y = row * (imageHeight + (IMAGE_MARGIN * 2)) + IMAGE_MARGIN;
+            // Calculate position (add paper margin offset)
+            const x = PAPER_MARGIN + (col * (imageWidth + IMAGE_MARGIN));
+            const y = PAPER_MARGIN + (row * (imageHeight + IMAGE_MARGIN));
             
             // Apply filters if any
             if (img.style.filter) {
