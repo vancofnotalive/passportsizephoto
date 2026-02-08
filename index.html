@@ -449,10 +449,10 @@ opacity: 0;
             visibility: hidden;
 }
 .printer-print-ui img {
-       width: calc((100% / 6) - 8px);
-    height: calc((100% / 7) - 4px);
-    margin: 4px !important;
-    margin-bottom: 4px !important;
+       width: calc((100% / 6) - 16px);
+    height: calc((100% / 7) - 8px);
+    margin: 8px !important;
+    margin-bottom: 8px !important;
     margin-top: 0 !important;
 }
 .select-multiple-btn {
@@ -1726,7 +1726,7 @@ function generateImage() {
     // Layout settings - matching your CSS
     const IMAGES_PER_ROW = 6;
     const TOTAL_ROWS = 7;
-    const IMAGE_MARGIN = 4; // From your CSS: margin: 4px !important;
+    const IMAGE_MARGIN = 8; // From your CSS: margin: 4px !important;
     
     // Create a canvas with A4 dimensions
     const canvas = document.createElement('canvas');
