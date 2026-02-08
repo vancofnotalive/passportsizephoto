@@ -1719,12 +1719,14 @@ function generateId(letterCount = 4, numberCount = 6) {
 function generateImage() {
     let a4 = document.getElementById("passport-size-photo-a4");
     
-    // Spacing between images (in pixels on the display)
-    const spacing = 5; // Adjust this value as needed
-    
     // A4 dimensions in pixels at 300 DPI (print quality)
     const A4_WIDTH = 2480;  // 210mm at 300 DPI
     const A4_HEIGHT = 3508; // 297mm at 300 DPI
+    
+    // Layout settings - matching your CSS
+    const IMAGES_PER_ROW = 6;
+    const TOTAL_ROWS = 7;
+    const IMAGE_MARGIN = 4; // From your CSS: margin: 4px !important;
     
     // Create a canvas with A4 dimensions
     const canvas = document.createElement('canvas');
@@ -1736,32 +1738,30 @@ function generateImage() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, A4_WIDTH, A4_HEIGHT);
     
-    // Get the actual dimensions of your A4 container
-    const containerRect = a4.getBoundingClientRect();
-    const scaleX = A4_WIDTH / containerRect.width;
-    const scaleY = A4_HEIGHT / containerRect.height;
+    // Calculate image dimensions based on CSS: width: calc((100% / 6) - 8px); height: calc((100% / 7) - 4px);
+    const imageWidth = (A4_WIDTH / IMAGES_PER_ROW) - (IMAGE_MARGIN * 2);
+    const imageHeight = (A4_HEIGHT / TOTAL_ROWS) - (IMAGE_MARGIN * 2);
     
     // Draw each image onto the canvas
     const images = a4.querySelectorAll("img");
     let loadedCount = 0;
     
     const drawImages = () => {
-        images.forEach(img => {
-            const imgRect = img.getBoundingClientRect();
-            const containerRect = a4.getBoundingClientRect();
+        images.forEach((img, index) => {
+            // Calculate row and column
+            const row = Math.floor(index / IMAGES_PER_ROW);
+            const col = index % IMAGES_PER_ROW;
             
-            // Calculate position relative to container
-            const x = (imgRect.left - containerRect.left) * scaleX;
-            const y = (imgRect.top - containerRect.top) * scaleY;
-            const width = imgRect.width * scaleX;
-            const height = imgRect.height * scaleY;
+            // Calculate position - matching your CSS margin layout
+            const x = col * (imageWidth + (IMAGE_MARGIN * 2)) + IMAGE_MARGIN;
+            const y = row * (imageHeight + (IMAGE_MARGIN * 2)) + IMAGE_MARGIN;
             
             // Apply filters if any
             if (img.style.filter) {
                 ctx.filter = img.style.filter;
             }
             
-            ctx.drawImage(img, x, y, width, height);
+            ctx.drawImage(img, x, y, imageWidth, imageHeight);
             ctx.filter = 'none'; // Reset filter
         });
         
@@ -1774,10 +1774,7 @@ function generateImage() {
             link.href = url;
             link.download = 'passport-photos-a4.png';
             link.click();
-            
-            // Or display it
-            // window.open(url);
-        }, 'image/png', 1.0); // Maximum quality
+        }, 'image/png', 1.0);
     };
     
     // Wait for all images to load before drawing
@@ -1797,7 +1794,6 @@ function generateImage() {
         }
     });
 }
-
     </script>
 </body>
 </html>
