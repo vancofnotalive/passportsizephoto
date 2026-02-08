@@ -127,7 +127,9 @@ width: calc(100% - 1ch) !important;
 
     }
     .photo-print .content .slider {
-width: calc(100% - 1ch);
+width: calc(60%);
+margin-left: 1ch !important;
+align-self: flex-start;
 
     }
     .photo-print .remove-bg-picker {
@@ -576,6 +578,9 @@ Selected: <span id="selected-count"></span>
 </section>
 
     <script>
+
+
+
       let urlArray = [];
 let urls = document.currentScript.dataset.css;
 if (urls)
@@ -1051,6 +1056,12 @@ function parseCss(cssText) {
   }
 }
 const target = document.body;      
+
+
+let ww = window.innerWidth;
+if (ww < 481) {
+  document.querySelector(".preview-print").setAttribute("onclick" , "generateImage()");
+}
 
         
 const defaultEditingValues = {
@@ -1683,6 +1694,86 @@ function generateId(letterCount = 4, numberCount = 6) {
 
   return result;
 }
+
+function generateImage() {
+    let a4 = document.getElementById("passport-size-photo-a4");
+    
+    // A4 dimensions in pixels at 300 DPI (print quality)
+    const A4_WIDTH = 2480;  // 210mm at 300 DPI
+    const A4_HEIGHT = 3508; // 297mm at 300 DPI
+    
+    // Create a canvas with A4 dimensions
+    const canvas = document.createElement('canvas');
+    canvas.width = A4_WIDTH;
+    canvas.height = A4_HEIGHT;
+    const ctx = canvas.getContext('2d');
+    
+    // Set white background
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, A4_WIDTH, A4_HEIGHT);
+    
+    // Get the actual dimensions of your A4 container
+    const containerRect = a4.getBoundingClientRect();
+    const scaleX = A4_WIDTH / containerRect.width;
+    const scaleY = A4_HEIGHT / containerRect.height;
+    
+    // Draw each image onto the canvas
+    const images = a4.querySelectorAll("img");
+    let loadedCount = 0;
+    
+    const drawImages = () => {
+        images.forEach(img => {
+            const imgRect = img.getBoundingClientRect();
+            const containerRect = a4.getBoundingClientRect();
+            
+            // Calculate position relative to container
+            const x = (imgRect.left - containerRect.left) * scaleX;
+            const y = (imgRect.top - containerRect.top) * scaleY;
+            const width = imgRect.width * scaleX;
+            const height = imgRect.height * scaleY;
+            
+            // Apply filters if any
+            if (img.style.filter) {
+                ctx.filter = img.style.filter;
+            }
+            
+            ctx.drawImage(img, x, y, width, height);
+            ctx.filter = 'none'; // Reset filter
+        });
+        
+        // Convert canvas to image
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            
+            // Download the image
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'passport-photos-a4.png';
+            link.click();
+            
+            // Or display it
+            // window.open(url);
+        }, 'image/png', 1.0); // Maximum quality
+    };
+    
+    // Wait for all images to load before drawing
+    images.forEach(img => {
+        if (img.complete) {
+            loadedCount++;
+            if (loadedCount === images.length) {
+                drawImages();
+            }
+        } else {
+            img.addEventListener('load', () => {
+                loadedCount++;
+                if (loadedCount === images.length) {
+                    drawImages();
+                }
+            });
+        }
+    });
+}
+
 
     </script>
 </body>
