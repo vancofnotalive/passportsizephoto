@@ -235,6 +235,7 @@ border: none;
 border-radius: 5px;
 font-size: calc(var(---photo-print___content-nav____button--font-size) * 0.7);
 cursor: pointer;
+
 }
 .preview-selection {
     position: absolute;
@@ -454,6 +455,26 @@ opacity: 0;
     margin-bottom: 4px !important;
     margin-top: 0 !important;
 }
+.select-multiple-btn {
+  background-color: rgb(13, 121, 121);
+  color: white;
+}
+.clear-selected-image-btn {
+  background-color: rgb(204, 105, 105);
+  color: white;
+}
+.delete-selected-image-btn {
+  background-color: rgb(180, 46, 46);
+  color: white;
+}
+.clear-paper-btn {
+  background-color: rgb(83, 5, 5);
+  color: white;
+}
+.select-all-btn {
+  background-color: rgb(18, 77, 100);
+  color: white;
+}
     </style>
 </head>
 <body class="page" id="page">
@@ -551,11 +572,11 @@ Selected: <span id="selected-count"></span>
 <section class="preview-nav">
     <main>
 
-        <button onclick="selectMultiplePassportPhoto(this)"> Select multiple </button>
-        <button onclick="clearTargetImages()"> Clear selected images </button>
-        <button onclick="deleteTargetImages()"> Delete selected images </button>
-        <button onclick="clearA4Paper()"> Clear paper </button>
-        <button onclick="selectAllPreview()"> Select all </button>
+        <button class="select-multiple-btn" onclick="selectMultiplePassportPhoto(this)"> Select multiple </button>
+        <button class="clear-selected-image-btn" onclick="clearTargetImages()"> Clear selected images </button>
+        <button class="delete-selected-image-btn" onclick="deleteTargetImages()"> Delete selected images </button>
+        <button class="clear-paper-btn" onclick="clearA4Paper()"> Clear paper </button>
+        <button class="select-all-btn" onclick="selectAllPreview()"> Select all </button>
     
     </main>
     <section onclick="passPortPhotoPrint()" class="preview-print">
@@ -1065,7 +1086,7 @@ if (ww < 481) {
 
         
 const defaultEditingValues = {
-    "brightness": 200,
+    "brightness": 100,
     "contrast": 100,
     "saturate": 100,
     "grayscale": 0,
@@ -1409,6 +1430,7 @@ confirmBtn.addEventListener('click', async () => {
   }
   addToPreview(urls);
   destroyCropper(guid);
+  selectAllPreview();
 });
  return guid;
 }
