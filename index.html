@@ -449,11 +449,11 @@ opacity: 0;
             visibility: hidden;
 }
 .printer-print-ui img {
-    width: calc((100% - (8px * 5)) / 6);  /* Total width minus 5 gaps, divided by 6 */
-    height: calc((100% - (8px * 6)) / 7);  /* Total height minus 6 gaps, divided by 7 */
+    width: calc((100% - (12px * 5)) / 6);  /* Total width minus 5 gaps, divided by 6 */
+    height: calc((100% - (12px * 6)) / 7);  /* Total height minus 6 gaps, divided by 7 */
     margin: 0 !important;
-    margin-left: 8px !important;
-    margin-top: 8px !important;
+    margin-left: 12px !important;
+    margin-top: 12px !important;
 }
 
 .printer-print-ui img:nth-child(6n+1) {
@@ -1737,7 +1737,7 @@ function generateImage() {
     // Layout settings
     const IMAGES_PER_ROW = 6;
     const TOTAL_ROWS = 7;
-    const IMAGE_MARGIN = 8; // Inner margin between images
+    const IMAGE_MARGIN = 12; // Inner margin between images
     
     // Create a canvas with A4 dimensions
     const canvas = document.createElement('canvas');
